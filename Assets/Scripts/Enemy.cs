@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour
 
     public Material hitMat;
 
+    public AudioClip shootingSFX;
+
     private Rigidbody rb;
     private Renderer rend;
     private Material originalMaterial;
@@ -277,6 +279,8 @@ public class Enemy : MonoBehaviour
             float randomPitch=Random.Range(-currentInaccuracy, currentInaccuracy);
 
             bulletRotation *= Quaternion.Euler(randomPitch, randomJaw + 90, 0f);
+
+            AudioManager.Instance.PlaySFX(shootingSFX, 0.5f);
 
             Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletRotation);
             Instantiate(weaponFlash, bulletSpawnPoint.position, bulletSpawnPoint.rotation);

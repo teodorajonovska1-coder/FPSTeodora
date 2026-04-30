@@ -172,6 +172,7 @@ MonoBehaviour:
   reloadTime: 1
   fireRate: 0.15
   magSize: 20
+  shootingSFX: {fileID: 8300000, guid: 2ece7bc87efaec34c84a266eaabadbf2, type: 3}
   bullet: {fileID: 5341742223406746680, guid: 9c3cddd6060b7cc4eadfb9cefcf6e7db, type: 3}
   bulletSpawnPoint: {fileID: 3906650650312700370}
   weaponFlash: {fileID: 514517404729004550, guid: c8abb1f024ed89c48a52f5c72d41f5c1, type: 3}

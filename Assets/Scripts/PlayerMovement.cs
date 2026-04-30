@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class PlayerMovement: MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class PlayerMovement: MonoBehaviour
     public float groundDistance = 0.4f; 
     public LayerMask groundMask;
 
+    public AudioClip footStepSFX;
+
     private Rigidbody rb; 
     private Vector2 moveInput; 
     private bool isGrounded; 
@@ -19,6 +22,8 @@ public class PlayerMovement: MonoBehaviour
     {
         rb = GetComponent<Rigidbody>(); 
         playerInput = new PlayerInput();
+
+        StartCoroutine(PlayFootStep());
     }
 
     void Update()
@@ -54,5 +59,17 @@ public class PlayerMovement: MonoBehaviour
         Vector3 direction = transform.right * moveInput.x + transform.forward * moveInput.y; 
         direction.Normalize();
         rb.linearVelocity = new Vector3(direction.x * moveSpeed, rb.linearVelocity.y, direction.z * moveSpeed);
+    }
+
+    IEnumerator PlayFootStep()
+    {
+        while(true)
+        {
+            if(rb.linearVelocity.magnitude > 0.1f && isGrounded)
+            {
+                AudioManager.Instance.PlaySFX(footStepSFX);
+            }
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }
